@@ -34,7 +34,8 @@ E_mag = np.sqrt(Ex**2 + Ey**2)
 
 # Grafico de lineas de campo 
 plt.figure(figsize=(16, 9))
-plt.streamplot(X, Y, Ex, Ey, color=E_mag, cmap='inferno', density=1.1, linewidth=0.5, arrowsize=1)
+plt.streamplot(X, Y, Ex, Ey, color=E_mag, cmap='inferno', density=1.2, linewidth=0.8, arrowsize=0.8)
+# Dibujamos las cargas
 for (xq, yq, q) in cargas:
     color = 'red' if q > 0 else 'blue'
     plt.scatter(xq, yq, c=color, s=100 * abs(q) / 50e-9, edgecolors='k')
@@ -42,8 +43,8 @@ plt.title("Líneas de campo eléctrico")
 plt.xlabel("x [m]")
 plt.ylabel("y [m]")
 plt.xlim(-0.03,0.03)
-plt.colorbar(label="|E| [N/C]")
-plt.axis('equal')
+plt.ylim(-0.03,0.03)
+
 plt.grid(True)
 plt.show()
 
@@ -51,11 +52,11 @@ plt.show()
 plt.figure(figsize=(16, 9))
 
 # Ajuste fino del numero de niveles y color
-levels = np.linspace(-2e-15, 2e-15, 50)  
+levels = np.linspace(-5e-15, 5e-15, 50)  
 cont = plt.contourf(X, Y, V, levels=levels, cmap='RdBu_r')
 
 # Superponemos líneas de campo (opcional, ayuda a interpretar)
-plt.streamplot(X, Y, Ex, Ey, color='k', density=1.1, linewidth=0.5, arrowsize=0.5)
+plt.streamplot(X, Y, Ex, Ey, color='k', density=1.2, linewidth=0.8, arrowsize=0.8)
 
 # Dibujamos las cargas
 for (xq, yq, q) in cargas:
@@ -66,8 +67,8 @@ plt.title("Superficies equipotenciales con líneas de campo")
 plt.xlabel("x [m]")
 plt.ylabel("y [m]")
 plt.xlim(-0.03,0.03)
+plt.ylim(-0.03,0.03)
 plt.colorbar(cont, label="V [V]")
-plt.axis('equal')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
